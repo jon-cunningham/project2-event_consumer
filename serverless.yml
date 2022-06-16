@@ -4,6 +4,7 @@ plugins:
   - serverless-python-requirements
 
 custom:
+  serviceName: JPC-Messaging-Service
   bucketName: 'cunningham-message-bucket'
   shared_message_bus: ${ssm:/${self:provider.stage}/serverless/tbg_message_bus}
   pythonRequirements:
@@ -56,7 +57,15 @@ functions:
 
 resources:
   Resources:
-
+    # using aws_lambda_powertools
+    LoggingMessagesFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Runtime: python3.8
+        Environment:
+          Variables:
+            LOG_LEVEL: INFO
+            POWERTOOLS_SERVICE_NAME: ${self.custom.serviceName}
     # SQS Queue to receive messages from SNS
     CunninghamQueue:
       Type: AWS::SQS::Queue
