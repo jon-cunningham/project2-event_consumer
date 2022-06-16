@@ -47,6 +47,10 @@ provider:
 functions:
   MessageLogger:
     handler: app.handler
+    Environment:
+      Variables:
+        LOG_LEVEL: INFO
+        POWERTOOLS_SERVICE_NAME: ${self.custom.ServiceName}
     events:
       - sqs:
         batchSize: 1
@@ -57,15 +61,7 @@ functions:
 
 resources:
   Resources:
-    # using aws_lambda_powertools
-    LoggingMessagesFunction:
-      Type: AWS::Serverless::Function
-      Properties:
-        Runtime: python3.8
-        Environment:
-          Variables:
-            LOG_LEVEL: INFO
-            POWERTOOLS_SERVICE_NAME: ${self.custom.serviceName}
+
     # SQS Queue to receive messages from SNS
     CunninghamQueue:
       Type: AWS::SQS::Queue
