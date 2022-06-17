@@ -38,8 +38,6 @@ provider:
       Resource:
         - arn:aws:sqs:*:*:${self:custom.CunninghamQueue}
 
-  environment:
-
 # function for logging the event
 functions:
   MessageLogger:
