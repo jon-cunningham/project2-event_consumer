@@ -6,8 +6,4 @@ logger = Logger(service="JPC-Messaging-Service")
 def handler(event, context):
     for record in event['records']:
         payload = record["body"]
-        logger.info(
-            {
-                "record": payload
-            }
-        )
+        logger.info({"record": payload})

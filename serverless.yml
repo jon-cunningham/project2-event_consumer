@@ -4,7 +4,6 @@ plugins:
   - serverless-python-requirements
 
 custom:
-  serviceName: JPC-Messaging-Service
   bucketName: 'cunningham-message-bucket'
   shared_message_bus: ${ssm:/${self:provider.stage}/serverless/tbg_message_bus}
   pythonRequirements:
@@ -40,8 +39,6 @@ provider:
         - arn:aws:sqs:*:*:${self:custom.CunninghamQueue}
 
   environment:
-    S3_BUCKET: ${self:custom.bucketName}
-    CUNNINGHAM_QUEUE_URL: { Ref: CunninghamQueue }
 
 # function for logging the event
 functions:
