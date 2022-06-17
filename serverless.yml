@@ -47,10 +47,6 @@ provider:
 functions:
   MessageLogger:
     handler: app.handler
-    Environment:
-      Variables:
-        LOG_LEVEL: INFO
-        POWERTOOLS_SERVICE_NAME: ${self.custom.ServiceName}
     events:
       - sqs:
         batchSize: 1
@@ -61,7 +57,6 @@ functions:
 
 resources:
   Resources:
-
     # SQS Queue to receive messages from SNS
     CunninghamQueue:
       Type: AWS::SQS::Queue
